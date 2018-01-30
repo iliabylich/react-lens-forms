@@ -1,0 +1,25 @@
+{
+  "name": "react-lens-forms",
+  "version": "1.0.0",
+  "description": "React Lens Forms",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack --progress --colors --watch --config webpack.config.js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "babel-register": "^6.16.3",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.15.0"
+  },
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2"
+  }
+}
