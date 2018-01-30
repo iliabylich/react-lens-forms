@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "immutable": "^3.8.2",
+    "ramda": "^0.25.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-router": "^4.2.0",

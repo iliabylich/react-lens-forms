@@ -1,11 +1,14 @@
 import React from 'react';
+import { view, set } from '../lenses.js';
 
 class Checkbox extends React.Component {
   render() {
-    const { value, onChange, name } = this.props;
+    const { root, lens } = this.props;
+    const value = view(lens, root);
+    const onChange = e => set(lens, e.target.checked, root);
 
     return (
-      <input type="checkbox" checked={value} onChange={onChange} name={name} />
+      <input type="checkbox" checked={value} onChange={onChange} />
     );
   }
 }

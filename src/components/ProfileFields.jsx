@@ -2,16 +2,18 @@ import React from 'react';
 
 import TextInput from '../inputs/TextInput.jsx';
 import Checkbox from '../inputs/Checkbox.jsx';
+import NumericField from '../inputs/NumericField.jsx';
+import { mapPropLens, compose } from '../lenses.js';
 
 class ProfileFields extends React.Component {
   render() {
-    const { value, onChange } = this.props;
+    const { root, lens } = this.props;
 
     return (
       <div>
-        <TextInput value={value.get('name')}  onChange={onChange} name="name" />
-        <TextInput value={value.get('age')}   onChange={onChange} name="age" />
-        <Checkbox  value={value.get('agree')} onChange={onChange} name="agree" />
+        <TextInput    root={root} lens={compose(lens, mapPropLens('name'))} />
+        <NumericField root={root} lens={compose(lens, mapPropLens('age'))} />
+        <Checkbox     root={root} lens={compose(lens, mapPropLens('agree'))} />
       </div>
     );
   }
