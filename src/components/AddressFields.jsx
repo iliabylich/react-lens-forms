@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TextInput from '../inputs/TextInput.jsx';
 import { mapPropLens, compose } from '../lenses.js';
 
-class AddressFields extends React.Component {
+class AddressFields extends React.PureComponent {
   static contextTypes = {
     root: PropTypes.object.isRequired
   }

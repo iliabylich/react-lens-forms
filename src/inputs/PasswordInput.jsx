@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { view, set } from '../lenses.js';
 
-class PasswordField extends React.Component {
+class PasswordField extends React.PureComponent {
   static contextTypes = {
     root: PropTypes.object.isRequired
   }

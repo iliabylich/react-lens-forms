@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { view, set } from '../lenses.js';
 
-class NumericField extends React.Component {
+class NumericField extends React.PureComponent {
   static contextTypes = {
     root: PropTypes.object.isRequired
   }

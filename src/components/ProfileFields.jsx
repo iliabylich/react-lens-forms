@@ -6,7 +6,7 @@ import Checkbox from '../inputs/Checkbox.jsx';
 import NumericField from '../inputs/NumericField.jsx';
 import { mapPropLens, compose } from '../lenses.js';
 
-class ProfileFields extends React.Component {
+class ProfileFields extends React.PureComponent {
   static contextTypes = {
     root: PropTypes.object.isRequired
   }

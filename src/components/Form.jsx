@@ -10,7 +10,7 @@ import AddressFields from './AddressFields.jsx';
 
 import { statePropLens, mapPropLens, compose } from '../lenses.js';
 
-class Form extends React.Component {
+class Form extends React.PureComponent {
   static childContextTypes = {
     root: PropTypes.object.isRequired
   }
