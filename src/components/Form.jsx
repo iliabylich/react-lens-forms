@@ -1,5 +1,5 @@
 import React from 'react';
-import { statePropLens, mapPropLens, compose } from '../lenses.js';
+import PropTypes from 'prop-types';
 
 import User from '../models/User.js';
 
@@ -8,7 +8,13 @@ import PasswordInput from '../inputs/PasswordInput.jsx';
 import ProfileFields from './ProfileFields.jsx';
 import AddressFields from './AddressFields.jsx';
 
+import { statePropLens, mapPropLens, compose } from '../lenses.js';
+
 class Form extends React.Component {
+  static childContextTypes = {
+    root: PropTypes.object.isRequired
+  }
+
   constructor(props, context) {
     super(props, context);
 
@@ -17,19 +23,22 @@ class Form extends React.Component {
     };
   }
 
+  getChildContext() {
+    return { root: this };
+  }
+
   render() {
-    const { user } = this.state;
     const userLens = statePropLens('user');
 
     return (
       <div className="form">
-        <div>state.user: {user.toString()}</div>
+        <div>state.user: {this.state.user.toString()}</div>
 
-        <TextInput     root={this} lens={compose(userLens, mapPropLens('email'))} />
-        <PasswordInput root={this} lens={compose(userLens, mapPropLens('password'))} />
+        <TextInput     lens={compose(userLens, mapPropLens('email'))} />
+        <PasswordInput lens={compose(userLens, mapPropLens('password'))} />
 
-        <ProfileFields root={this} lens={compose(userLens, mapPropLens('profile'))} />
-        <AddressFields root={this} lens={compose(userLens, mapPropLens('address'))} />
+        <ProfileFields lens={compose(userLens, mapPropLens('profile'))} />
+        <AddressFields lens={compose(userLens, mapPropLens('address'))} />
       </div>
     );
   }

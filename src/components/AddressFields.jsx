@@ -1,17 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import TextInput from '../inputs/TextInput.jsx';
 import { mapPropLens, compose } from '../lenses.js';
 
 class AddressFields extends React.Component {
+  static contextTypes = {
+    root: PropTypes.object.isRequired
+  }
+
   render() {
-    const { root, lens } = this.props;
+    const { lens } = this.props;
 
     return (
       <div>
-        <TextInput root={root} lens={compose(lens, mapPropLens('country'))} />
-        <TextInput root={root} lens={compose(lens, mapPropLens('city'))} />
-        <TextInput root={root} lens={compose(lens, mapPropLens('street'))} />
+        <TextInput lens={compose(lens, mapPropLens('country'))} />
+        <TextInput lens={compose(lens, mapPropLens('city'))} />
+        <TextInput lens={compose(lens, mapPropLens('street'))} />
       </div>
     );
   }
