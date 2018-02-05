@@ -4,21 +4,22 @@ import PropTypes from 'prop-types';
 import TextInput from '../inputs/TextInput.jsx';
 import Checkbox from '../inputs/Checkbox.jsx';
 import NumericField from '../inputs/NumericField.jsx';
-import { mapPropLens, compose } from '../lenses.js';
+
+import { Lens, PropertyLens } from '../lenses.js';
 
 class ProfileFields extends React.PureComponent {
-  static contextTypes = {
-    root: PropTypes.object.isRequired
-  }
+  static propTypes = {
+    lens: PropTypes.instanceOf(Lens)
+  };
 
   render() {
     const { lens } = this.props;
 
     return (
       <div>
-        <TextInput    lens={compose(lens, mapPropLens('name'))} />
-        <NumericField lens={compose(lens, mapPropLens('age'))} />
-        <Checkbox     lens={compose(lens, mapPropLens('agree'))} />
+        <TextInput    lens={lens.chain(new PropertyLens('name'))} />
+        <NumericField lens={lens.chain(new PropertyLens('age'))} />
+        <Checkbox     lens={lens.chain(new PropertyLens('agree'))} />
       </div>
     );
   }

@@ -8,37 +8,36 @@ import PasswordInput from '../inputs/PasswordInput.jsx';
 import ProfileFields from './ProfileFields.jsx';
 import AddressFields from './AddressFields.jsx';
 
-import { statePropLens, mapPropLens, compose } from '../lenses.js';
+import { BindedLens, PropertyLens, LensChain } from '../lenses.js';
 
 class Form extends React.PureComponent {
-  static childContextTypes = {
-    root: PropTypes.object.isRequired
-  }
-
   constructor(props, context) {
     super(props, context);
 
     this.state = {
       user: new User()
     };
-  }
 
-  getChildContext() {
-    return { root: this };
+    const userLens = new BindedLens(
+      () => this.state.user,
+      (user) => this.setState({ user })
+    );
+
+    this.lens = new LensChain(userLens);
   }
 
   render() {
-    const userLens = statePropLens('user');
+    const lens = this.lens;
 
     return (
       <div className="form">
         <div>state.user: {this.state.user.toString()}</div>
 
-        <TextInput     lens={compose(userLens, mapPropLens('email'))} />
-        <PasswordInput lens={compose(userLens, mapPropLens('password'))} />
+        <TextInput     lens={lens.chain(new PropertyLens('email'))} />
+        <PasswordInput lens={lens.chain(new PropertyLens('password'))} />
 
-        <ProfileFields lens={compose(userLens, mapPropLens('profile'))} />
-        <AddressFields lens={compose(userLens, mapPropLens('address'))} />
+        <ProfileFields lens={lens.chain(new PropertyLens('profile'))} />
+        <AddressFields lens={lens.chain(new PropertyLens('address'))} />
       </div>
     );
   }

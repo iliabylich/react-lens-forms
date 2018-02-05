@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { view, set } from '../lenses.js';
+import { Lens } from '../lenses.js';
 
 class NumericField extends React.PureComponent {
-  static contextTypes = {
-    root: PropTypes.object.isRequired
-  }
+  static propTypes = {
+    lens: PropTypes.instanceOf(Lens)
+  };
 
   render() {
     const { lens } = this.props;
-    const root = this.context.root;
-    const value = view(lens, root);
-    const onChange = e => set(lens, e.target.value, root);
 
     return (
-      <input type="number" value={value} onChange={onChange} />
+      <input
+        type="number"
+        value={lens.view()}
+        onChange={e => lens.set(e.target.value)}
+      />
     );
   }
 }
