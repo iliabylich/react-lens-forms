@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Lens, PropertyLens } from 'react-state-focus';
 
 import TextInput from '../inputs/TextInput.jsx';
-import { Lens, PropertyLens } from '../lenses.js';
 
 class AddressFields extends React.PureComponent {
   static propTypes = {

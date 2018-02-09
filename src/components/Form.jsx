@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { StateBoundLens, PropertyLens, LensChain } from 'react-state-focus';
 
 import User from '../models/User.js';
 
@@ -7,8 +8,6 @@ import TextInput from '../inputs/TextInput.jsx';
 import PasswordInput from '../inputs/PasswordInput.jsx';
 import ProfileFields from './ProfileFields.jsx';
 import AddressFields from './AddressFields.jsx';
-
-import { BindedLens, PropertyLens, LensChain } from '../lenses.js';
 
 class Form extends React.PureComponent {
   constructor(props, context) {
@@ -18,12 +17,9 @@ class Form extends React.PureComponent {
       user: new User()
     };
 
-    const userLens = new BindedLens(
-      () => this.state.user,
-      (user) => this.setState({ user })
+    this.lens = new LensChain(
+      new StateBoundLens(this, 'user')
     );
-
-    this.lens = new LensChain(userLens);
   }
 
   render() {

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { Lens } from '../lenses.js';
+import { Lens, PropertyLens } from 'react-state-focus';
 
 class PasswordField extends React.PureComponent {
   static propTypes = {

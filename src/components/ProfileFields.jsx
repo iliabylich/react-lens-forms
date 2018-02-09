@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Lens, PropertyLens } from 'react-state-focus';
 
 import TextInput from '../inputs/TextInput.jsx';
 import Checkbox from '../inputs/Checkbox.jsx';
 import NumericField from '../inputs/NumericField.jsx';
-
-import { Lens, PropertyLens } from '../lenses.js';
 
 class ProfileFields extends React.PureComponent {
   static propTypes = {
