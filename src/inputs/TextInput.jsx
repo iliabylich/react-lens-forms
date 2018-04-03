@@ -1,23 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Lens, PropertyLens } from 'react-state-focus';
+import { Lens, LensBoundComponent } from 'react-state-focus';
 
-class TextInput extends React.PureComponent {
-  static propTypes = {
-    lens: PropTypes.instanceOf(Lens)
-  };
+const TextInput = ({ lens }) => {
+  console.log('TextInput')
 
-  render() {
-    const { lens } = this.props;
-
-    return (
-      <input
-        type="text"
-        value={lens.view()}
-        onChange={e => lens.set(e.target.value)}
-      />
-    );
-  }
+  return (
+    <input
+      type="text"
+      value={lens.view()}
+      onChange={e => lens.set(e.target.value)}
+    />
+  );
 }
 
-export default TextInput;
+TextInput.propTypes = {
+  lens: PropTypes.instanceOf(Lens)
+}
+
+export default LensBoundComponent(TextInput);

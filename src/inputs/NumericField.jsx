@@ -1,23 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Lens, PropertyLens } from 'react-state-focus';
+import { Lens, LensBoundComponent } from 'react-state-focus';
 
-class NumericField extends React.PureComponent {
-  static propTypes = {
-    lens: PropTypes.instanceOf(Lens)
-  };
+const NumericField = ({ lens }) => {
+  console.log('NumericField')
 
-  render() {
-    const { lens } = this.props;
-
-    return (
-      <input
-        type="number"
-        value={lens.view()}
-        onChange={e => lens.set(e.target.value)}
-      />
-    );
-  }
+  return (
+    <input
+      type="number"
+      value={lens.view()}
+      onChange={e => lens.set(e.target.value)}
+    />
+  );
 }
 
-export default NumericField;
+NumericField.propTypes = {
+  lens: PropTypes.instanceOf(Lens)
+}
+
+export default LensBoundComponent(NumericField);

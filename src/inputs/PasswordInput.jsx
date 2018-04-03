@@ -1,23 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Lens, PropertyLens } from 'react-state-focus';
+import { Lens, LensBoundComponent } from 'react-state-focus';
 
-class PasswordField extends React.PureComponent {
-  static propTypes = {
-    lens: PropTypes.instanceOf(Lens)
-  };
+const PasswordField = ({ lens }) => {
+  console.log('PasswordField')
 
-  render() {
-    const { lens } = this.props;
-
-    return (
-      <input
-        type="password"
-        value={lens.view()}
-        onChange={e => lens.set(e.target.value)}
-      />
-    );
-  }
+  return (
+    <input
+      type="password"
+      value={lens.view()}
+      onChange={e => lens.set(e.target.value)}
+    />
+  );
 }
 
-export default PasswordField;
+PasswordField.propTypes = {
+  lens: PropTypes.instanceOf(Lens)
+}
+
+export default LensBoundComponent(PasswordField);

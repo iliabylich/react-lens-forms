@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StateBoundLens, PropertyLens, LensChain } from 'react-state-focus';
+import { StateBoundLens, LensChain } from 'react-state-focus';
 
 import User from '../models/User.js';
 
 import TextInput from '../inputs/TextInput.jsx';
 import PasswordInput from '../inputs/PasswordInput.jsx';
-import ProfileFields from './ProfileFields.jsx';
-import AddressFields from './AddressFields.jsx';
+import ProfileFieldset from './ProfileFieldset.jsx';
+import AddressFieldset from './AddressFieldset.jsx';
 
 class Form extends React.PureComponent {
   constructor(props, context) {
@@ -22,18 +22,30 @@ class Form extends React.PureComponent {
     );
   }
 
+  componentDidMount() {
+    console.groupEnd()
+  }
+
+  componentDidUpdate() {
+    console.groupEnd()
+  }
+
   render() {
     const lens = this.lens;
+    const { user } = this.state;
+
+    console.group('render');
+    console.log('Form');
 
     return (
       <div className="form">
         <div>state.user: {this.state.user.toString()}</div>
 
-        <TextInput     lens={lens.chain(new PropertyLens('email'))} />
-        <PasswordInput lens={lens.chain(new PropertyLens('password'))} />
+        <TextInput     lens={lens.chainProperty('email')} />
+        <PasswordInput lens={lens.chainProperty('password')} />
 
-        <ProfileFields lens={lens.chain(new PropertyLens('profile'))} />
-        <AddressFields lens={lens.chain(new PropertyLens('address'))} />
+        <ProfileFieldset lens={lens.chainProperty('profile')} />
+        <AddressFieldset lens={lens.chainProperty('address')} />
       </div>
     );
   }
